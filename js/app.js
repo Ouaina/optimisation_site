@@ -210,7 +210,18 @@
     if (champ) champ.addEventListener('input', filterGallery);
   });
 
-  window.addEventListener('scroll', revealCards);
-  window.addEventListener('resize', revealCards);
+  // Au plus un recalcul par image affichée pendant le défilement.
+  var revealQueued = false;
+  function scheduleReveal() {
+    if (revealQueued) return;
+    revealQueued = true;
+    window.requestAnimationFrame(function () {
+      revealQueued = false;
+      revealCards();
+    });
+  }
+
+  window.addEventListener('scroll', scheduleReveal, { passive: true });
+  window.addEventListener('resize', scheduleReveal);
   window.addEventListener('load', revealCards);
 })();
