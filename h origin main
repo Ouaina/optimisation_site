@@ -1,0 +1,20 @@
+[33m47eca71[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Pages img1-6 : Poppins chargee via <link> (apres suppression de l'@import), scripts en defer
+[33maa6734d[m Favicon : reference vers favicon.jpg (le fichier png n'existe plus)
+[33mab2dc29[m Images : redimensionnees a 750 px de large et compressees (9,9 Mo -> 0,4 Mo), doublon hero-bg/img6 supprime, favicon 32x32 en 373 octets
+[33m28ce03d[m Images de la galerie : width/height (evite le decalage de mise en page) et loading=lazy
+[33m14d374d[m Preload de l'image LCP (hero-bg.jpg, fetchpriority=high) a la place de img6.jpg?v=2 (telechargement en double) ; retire le dns-prefetch inutile
+[33m3230e58[m Charge ui-kit.min.js et app.js en defer (ne bloquent plus le rendu)
+[33m0f8a2f8[m Supprime la requete bloquante vers js/legacy/polyfills.js (404)
+[33m27cdf16[m Polices : Poppins en font-display: swap, preconnect vers Google Fonts, preload de la police avec crossorigin
+[33m2f44ff7[m theme-legacy.css : retire l'import de Playfair Display (aucune classe .legacy-* utilisee dans le site)
+[33mb3620a2[m CSS : remplace la chaine d'@import (styles -> extra -> theme-legacy -> Google Fonts) par des <link> charges en parallele
+[33m5154a12[m CSS : supprime 799 regles .extra-* jamais utilisees (extra.css : 29 kB -> moins de 1 kB)
+[33m9c97969[m CSS : supprime 1 199 regles .redundant-* jamais utilisees (styles.css : 92 kB -> 4 kB)
+[33md4e1040[m app.js : limite revealCards a un appel par image affichee (requestAnimationFrame, ecouteur de scroll passif)
+[33m0444199[m app.js : revealCards separe lectures et ecritures (reflow force en boucle imbriquee, 371 cases du calendrier relues a chaque scroll)
+[33m2d15d7c[m app.js : construit la datalist en une seule affectation (innerHTML += en boucle, complexite quadratique)
+[33m1213eea[m analytics.js : supprime la boucle de hachage bloquante (jusqu'a 430 ms toutes les 2,6 s sur fenetre > 1024 px)
+[33m9b39dbc[m ui-kit : supprime l'observer qui relisait le style des 793 elements a chaque modification du DOM (reflows forces, __uk jamais lu)
+[33mb18f1b4[m ui-kit : supprime le pool de 240 000 objets construit au chargement (_pool, jamais lu)
+[33m343f0bd[m ui-kit : supprime l'attente active de 620 ms au chargement (_cal, jamais lu)
+[33m7e0c6a0[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Add files via upload
